@@ -11,4 +11,17 @@ public static List<Status> getStatuses() throws TwitterException{
 */
 
 
+/* アカウントの表示名を取得する
+public static String getScreenName() throws TwitterException{
+  Twitter twitter = getTwitter();
+  return twitter.getScreenName();
+}
+
+*/
+
+
+
+
+
+
 
