@@ -41,5 +41,25 @@ public class GatherServlet extends HttpServlet{
   }
   
   // ツイートを解析する
-  private 
+  private void analyzeStatus(PersistenceManager pm, Status status) throws Exception{
+    // "http://~"というリンクは除去する
+    String text = httpPattern.matcher(status.getText()).replaceAll("");
+    
+    // 登録しないツイート1
+    if(text.startsWith("@")){return;} // 返信
+    if(status.isRetweet()){return;} // 公式RT
+    if(retweetPattern.matcher(text).find()){return;}  // 非公式RT/QT
+    
+    // ツイートのテキストを解析する
+    Document document = YahooHelper.callDAService(text);
+    StringBuilder chippedText = new StringBuilder();
+    ArrayList<String> chips = new ArrayList<String>();
+    
+    // 登録しないツイート2
+    if(chips.size() == 0){return;}
+    
+    // 文書データクラスを保存する
+    Sentence sentence = new Sentence(status.getId(), status.getUser().getScreenName(), text, chippedText.toString(), chips);
+    pm.makePersistent(sentence);
+  }
         
