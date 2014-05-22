@@ -1,0 +1,14 @@
+
+/* タイムライン上のツイートを取得する
+import java.util.List;
+import twitter4j.Status;
+
+public static List<Status> getStatuses() throws TwitterException{
+  Twitter twitter = getTwitter();
+  return twitter.getHomeTimeline();
+}
+
+*/
+
+
+
