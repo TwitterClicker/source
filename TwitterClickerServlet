@@ -42,7 +42,7 @@ public class TwitterClickerServlet extends HttpServlet {
 			while (itr.hasNext()) {
 				status = itr.next();
 				resp.getWriter().println(status.getUser().getName());	// twitterのユーザ名をWebページに出力
-				resp.getWriter().println(status.getText());				// twitterのツイート文をWebページに出力
+				resp.getWriter().println(status.getText());		// twitterのツイート文をWebページに出力
 				resp.getWriter().println();
 			}
 		} catch (TwitterException e) {
