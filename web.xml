@@ -4,40 +4,31 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-   
+
     <servlet>
-        <servlet-name>Tweet</servlet-name>
-        <servlet-class>com.appspot.TwitterClicker.TweetServlet</servlet-class>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>com.appspot.twitterclicker.IndexServlet</servlet-class>
     </servlet>
-    <servlet>
-    	<servlet-name>Gather</servlet-name>
-    	<servlet-class>com.appspot.twitterclicker.GatherServlet</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-	<servlet-name>TwitterClicker</servlet-name>
-	<url-pattern>/twitterclicker</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Tweet</servlet-name>
-        <url-pattern>/cron/tweet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>Gather</servlet-name>
-    	<url-pattern>/cron/gather</url-pattern>
+       <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/index</url-pattern>
     </servlet-mapping>
     
-    <welcome-file-list>
-	<welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
-    
-    <security-constraint>
-    	<web-resource-collection>
-    	    <web-resource-name>admin</web-resource-name>
-    	    <url-pattern>/cron/*</url-pattern>
-	</web-resource-collection>
-	<auth-constraint>
-		<role-name>admin</role-name>
-	</auth-constraint>
-    </security-constraint>
+    <filter>
+        <!-- サーブレットフィルタの名前とクラスの指定 -->
+        <filter-name>Encoding</filter-name>
+        <filter-class>com.appspot.twitterclicker.EncodingFilter</filter-class>
+        <!-- サーブレットフィルタのinitメソッドで取得する設定情報 -->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>
